@@ -25,6 +25,7 @@ body {
     min-height: 100vh;
     font-family: Arial, sans-serif;
     color: var(--white);
+    text-align: centre;
     background-color: var(--dark);
     background-image:
         radial-gradient(
