@@ -1,29 +1,7 @@
 
-body {
-    background-color: #151515;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 50px;
-}
-
-h1 {
-    color: orange;
-}
-
-button {
-    background-color: orange;
-    color: black;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: white;
-}
-
+/* ==========================
+   GLOBAL RESET
+========================== */
 
 * {
     margin: 0;
@@ -31,91 +9,265 @@ button:hover {
     box-sizing: border-box;
 }
 
+:root {
+    --orange: #ff8c00;
+    --gold: #ffc15a;
+    --dark: #080808;
+    --white: #ffffff;
+    --muted: #b5b5b5;
+}
+
+/* ==========================
+   BODY BACKGROUND
+========================== */
+
 body {
     min-height: 100vh;
     font-family: Arial, sans-serif;
-    color: white;
-    text-align: center;
-    padding: 50px 20px;
-
-    background:
+    color: var(--white);
+    background-color: var(--dark);
+    background-image:
         radial-gradient(
-            circle at 15% 20%,
-            rgba(255, 120, 0, 0.25),
-            transparent 35%
+            ellipse at 15% 15%,
+            rgba(255, 115, 0, 0.22),
+            transparent 40%
         ),
         radial-gradient(
-            circle at 85% 75%,
-            rgba(255, 190, 0, 0.18),
-            transparent 35%
+            ellipse at 85% 80%,
+            rgba(255, 180, 0, 0.16),
+            transparent 40%
         ),
-        linear-gradient(135deg, #080808, #19110a, #080808);
-
-    overflow-x: hidden;
-    position: relative;
-    isolation: isolate;
-}
-
-/* Moving glowing background */
-body::before {
-    content: "";
-    position: fixed;
-    inset: -50%;
-    z-index: -1;
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255, 140, 0, 0.13),
-            transparent 35%
+        linear-gradient(
+            135deg,
+            #050505,
+            #17100a,
+            #080808
         );
 
-    animation: glowMove 10s ease-in-out infinite alternate;
+    background-attachment: fixed;
+    overflow-x: hidden;
+    position: relative;
 }
 
-@keyframes glowMove {
+/* ==========================
+   AMBIENT GLOW
+========================== */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: -1;
+    animation: floatingGlow 8s ease-in-out infinite alternate;
+}
+
+body::before {
+    background: #ff7900;
+    top: -150px;
+    left: -100px;
+}
+
+body::after {
+    background: #ffb000;
+    bottom: -150px;
+    right: -100px;
+    animation-delay: 2s;
+}
+
+@keyframes floatingGlow {
     from {
-        transform: translate(-8%, -5%);
+        transform: translate(0, 0);
     }
 
     to {
-        transform: translate(8%, 5%);
+        transform: translate(80px, 60px);
     }
 }
 
+/* ==========================
+   HEADINGS
+========================== */
+
 h1 {
-    color: #ffae42;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--gold);
+
     text-shadow:
-        0 0 10px #ff8c00,
-        0 0 25px rgba(255, 140, 0, 0.6);
+        0 0 10px rgba(255, 140, 0, 0.8),
+        0 0 30px rgba(255, 140, 0, 0.5);
+}
+
+h2, h3 {
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+/* ==========================
+   PARAGRAPHS
+========================== */
+
+p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.8;
     margin-bottom: 20px;
 }
 
-p {
-    color: #eeeeee;
-    margin-bottom: 25px;
-}
+/* ==========================
+   BUTTONS
+========================== */
 
 button {
-    background: linear-gradient(45deg, #ff8c00, #ffc04d);
-    color: #111;
     padding: 14px 30px;
-    border: none;
-    border-radius: 10px;
+    border: 1px solid rgba(255, 190, 80, 0.6);
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #ff8c00,
+        #ffc15a
+    );
+
+    color: #100900;
+    font-size: 15px;
+    font-weight: bold;
     cursor: pointer;
 
     box-shadow:
-        0 0 10px rgba(255, 140, 0, 0.7),
-        0 0 25px rgba(255, 140, 0, 0.4);
+        0 0 12px rgba(255, 140, 0, 0.5),
+        0 0 30px rgba(255, 140, 0, 0.2);
+
+    transition: all 0.35s ease;
+}
+
+button:hover {
+    transform: translateY(-5px) scale(1.04);
+
+    box-shadow:
+        0 0 20px rgba(255, 140, 0, 0.9),
+        0 0 45px rgba(255, 140, 0, 0.5);
+}
+
+/* ==========================
+   GLASS CONTAINERS
+========================== */
+
+.card {
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 180, 70, 0.2);
+    border-radius: 20px;
+    padding: 25px;
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(255, 140, 0, 0.06);
 
     transition: 0.3s ease;
 }
 
-button:hover {
-    transform: translateY(-3px);
+.card:hover {
+    border-color: var(--orange);
+    transform: translateY(-5px);
+
     box-shadow:
-        0 0 15px #ff8c00,
-        0 0 35px #ff8c00;
+        0 0 25px rgba(255, 140, 0, 0.2);
 }
 
+/* ==========================
+   LINKS
+========================== */
+
+a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: var(--orange);
+    text-shadow: 0 0 12px var(--orange);
+}
+
+/* ==========================
+   INPUTS
+========================== */
+
+input,
+textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 180, 70, 0.3);
+
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    outline: none;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
+}
+
+/* ==========================
+   SELECTION
+========================== */
+
+::selection {
+    background: var(--orange);
+    color: black;
+}
+
+/* ==========================
+   SCROLLBAR
+========================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #080808;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        var(--orange),
+        var(--gold)
+    );
+    border-radius: 20px;
+}
+
+/* ==========================
+   RESPONSIVE DESIGN
+========================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 25px 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    button {
+        padding: 12px 22px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+}
