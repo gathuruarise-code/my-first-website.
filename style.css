@@ -1,25 +1,96 @@
 
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #151515;
-    color: white;
+    min-height: 100vh;
     font-family: Arial, sans-serif;
+    color: white;
     text-align: center;
-    padding: 50px;
+    padding: 50px 20px;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255, 120, 0, 0.25),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(255, 190, 0, 0.18),
+            transparent 35%
+        ),
+        linear-gradient(135deg, #080808, #19110a, #080808);
+
+    overflow-x: hidden;
+    position: relative;
+    isolation: isolate;
+}
+
+/* Moving glowing background */
+body::before {
+    content: "";
+    position: fixed;
+    inset: -50%;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 140, 0, 0.13),
+            transparent 35%
+        );
+
+    animation: glowMove 10s ease-in-out infinite alternate;
+}
+
+@keyframes glowMove {
+    from {
+        transform: translate(-8%, -5%);
+    }
+
+    to {
+        transform: translate(8%, 5%);
+    }
 }
 
 h1 {
-    color: orange;
+    color: #ffae42;
+    text-shadow:
+        0 0 10px #ff8c00,
+        0 0 25px rgba(255, 140, 0, 0.6);
+    margin-bottom: 20px;
+}
+
+p {
+    color: #eeeeee;
+    margin-bottom: 25px;
 }
 
 button {
-    background-color: orange;
-    color: black;
-    padding: 12px 25px;
+    background: linear-gradient(45deg, #ff8c00, #ffc04d);
+    color: #111;
+    padding: 14px 30px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
+
+    box-shadow:
+        0 0 10px rgba(255, 140, 0, 0.7),
+        0 0 25px rgba(255, 140, 0, 0.4);
+
+    transition: 0.3s ease;
 }
 
 button:hover {
-    background-color: white;
+    transform: translateY(-3px);
+    box-shadow:
+        0 0 15px #ff8c00,
+        0 0 35px #ff8c00;
 }
+
